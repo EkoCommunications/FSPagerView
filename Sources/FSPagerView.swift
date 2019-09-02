@@ -93,6 +93,30 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
         }
     }
     
+    /// The alignment of pager view. Default is center.
+    @IBInspectable
+    open var horizontalAlignment: HorizontalAlignment {
+        get {
+            return collectionViewLayout.horizontalAlignment
+        }
+        set {
+            collectionViewLayout.horizontalAlignment = newValue
+            collectionViewLayout.forceInvalidate()
+        }
+    }
+    
+    /// The spacing at leading or trailing of pager view depends. No effect on center alignment. Default is false.
+    @IBInspectable
+    open var needsEdgeSpacing: Bool {
+        get {
+            return collectionViewLayout.needsEdgeSpacing
+        }
+        set {
+            collectionViewLayout.needsEdgeSpacing = newValue
+            collectionViewLayout.forceInvalidate()
+        }
+    }
+    
     /// The time interval of automatic sliding. 0 means disabling automatic sliding. Default is 0.
     @IBInspectable
     open var automaticSlidingInterval: CGFloat = 0.0 {
@@ -625,6 +649,12 @@ extension FSPagerView {
         case horizontal
         /// The pager view scrolls content vertically
         case vertical
+    }
+    
+    @objc public enum HorizontalAlignment: Int {
+        case left
+        case center
+        case right
     }
     
     /// Requests that FSPagerView use the default value for a given distance.
